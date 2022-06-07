@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Owner;
+use Illuminate\support\Facades\DB;
 
 class OwnerController extends Controller
 {
@@ -19,7 +21,10 @@ class OwnerController extends Controller
 
     public function index()
     {
-        dd('おーなーかんり');
+        $e_all = Owner::all();
+        $q_get = DB::table('owners')->select('name','created_at')->get();
+
+        return view('admin.owners.index',compact('e_all','q_get'));
     }
 
     /**
