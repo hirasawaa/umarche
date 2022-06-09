@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Owner;
 use Illuminate\support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class OwnerController extends Controller
 {
@@ -23,7 +24,7 @@ class OwnerController extends Controller
     {
         // $e_all = Owner::all();
         // $q_get = DB::table('owners')->select('name','created_at')->get();
-        $owners = Owner::select('name','email','created_at')->get();
+        $owners = Owner::select('id','name','email','created_at')->get();
 
         return view('admin.owners.index',compact('owners'));
     }
@@ -46,7 +47,20 @@ class OwnerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:owners'],
+            'password' => ['required', 'confirmed', 'min:8'],
+        ]);
+
+        Owner::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return redirect()->route('admin.owners.index')
+        ->with('message','オーナー登録を実施しました。');
     }
 
     /**
@@ -68,7 +82,8 @@ class OwnerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $owner = Owner::findOrFail($id);
+        return view('admin.owners.edit',compact('owner'));
     }
 
     /**
@@ -80,7 +95,15 @@ class OwnerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $owner = Owner::findOrFail($id);
+        $owner->name = $request->name;
+        $owner->email = $request->email;
+        $owner->password = Hash::make($request->password);
+        $owner->save();
+
+        return redirect()
+        ->route('admin.owners.index')
+        ->with('message','オーナー情報を更新しました。');
     }
 
     /**
