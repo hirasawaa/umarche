@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\OwnerController;
+use SebastianBergmann\CodeUnit\FunctionUnit;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,14 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
 })->middleware(['auth:admin'])->name('dashboard');
+
+Route::prefix('expired-owners')->
+    middleware(['auth:admin'])->group(function(){
+        Route::get('index',[OwnerController::class,'expiredOwnerIndex'])
+        ->name('expired-owners.index');
+        Route::post('destroy/{owner}',[OwnerController::class,'expiredOwnerDestroy'])
+        ->name('expired-owners.destroy');
+});
 
 Route::resource('owners',OwnerController::class)
 ->middleware('auth:admin');
