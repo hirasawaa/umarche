@@ -23,9 +23,9 @@ use SebastianBergmann\CodeUnit\FunctionUnit;
 |
 */
 
-Route::get('/', function () {
-    return view('admin.welcome');
-});
+// Route::get('/', function () {
+//     return view('admin.welcome');
+// });
 
 Route::get('/dashboard', function () {
     return view('admin.dashboard');
@@ -40,7 +40,7 @@ Route::prefix('expired-owners')->
 });
 
 Route::resource('owners',OwnerController::class)
-->middleware('auth:admin');
+->middleware('auth:admin')->except(['show']);
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
