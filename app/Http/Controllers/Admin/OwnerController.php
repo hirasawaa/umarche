@@ -52,9 +52,9 @@ class OwnerController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:owners'],
-            'password' => ['required', 'confirmed', 'min:8'],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:owners',
+            'password' => 'required|confirmed|min:8',
         ]);
 
         try{
