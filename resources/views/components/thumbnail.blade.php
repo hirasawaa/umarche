@@ -1,5 +1,5 @@
 @php
-    if($type === 'shop'){
+    if($type === 'shops'){
         $path ='storage/shops/';
     }
     if($type ==="products"){

@@ -22,7 +22,7 @@
                                     @endif
                                 </div>
                                 <div class="text-xl">{{ $shop->name }}</div>
-                                <x-thumbnail type="shop" :filename="$shop->filename" />
+                                <x-thumbnail type="shops" :filename="$shop->filename" />
                             </div>
                         </a>
                     </div>
