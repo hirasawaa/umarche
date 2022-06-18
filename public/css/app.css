@@ -659,6 +659,10 @@ select {
   margin-left: auto;
   margin-right: auto;
 }
+.my-4 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
 .ml-3 {
   margin-left: 0.75rem;
 }
@@ -709,6 +713,9 @@ select {
 }
 .mt-6 {
   margin-top: 1.5rem;
+}
+.mt-32 {
+  margin-top: 8rem;
 }
 .block {
   display: block;
@@ -782,11 +789,11 @@ select {
 .w-28 {
   width: 7rem;
 }
-.w-48 {
-  width: 12rem;
-}
 .w-32 {
   width: 8rem;
+}
+.w-48 {
+  width: 12rem;
 }
 .w-1\/4 {
   width: 25%;
