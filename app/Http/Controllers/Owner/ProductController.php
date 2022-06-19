@@ -51,13 +51,13 @@ class ProductController extends Controller
         $shop=Shop::where('owner_id',Auth::id())
         ->select('id','name')
         ->get();
-        $image=Image::where('owner_id',Auth::id())
+        $images=Image::where('owner_id',Auth::id())
         ->select('id','title','filename')
         ->get();
         $categories=PrimaryCategory::with('secondary')
         ->get();
 
-        return view('owner.products.create',compact('shop','image','categories'));
+        return view('owner.products.create',compact('shop','images','categories'));
     }
 
     /**
@@ -68,7 +68,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
