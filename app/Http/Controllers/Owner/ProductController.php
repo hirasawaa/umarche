@@ -48,7 +48,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $shop=Shop::where('owner_id',Auth::id())
+        $shops=Shop::where('owner_id',Auth::id())
         ->select('id','name')
         ->get();
         $images=Image::where('owner_id',Auth::id())
@@ -57,7 +57,7 @@ class ProductController extends Controller
         $categories=PrimaryCategory::with('secondary')
         ->get();
 
-        return view('owner.products.create',compact('shop','images','categories'));
+        return view('owner.products.create',compact('shops','images','categories'));
     }
 
     /**
