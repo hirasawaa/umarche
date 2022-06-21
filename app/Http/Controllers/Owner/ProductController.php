@@ -73,16 +73,16 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:50',
-            'information' => 'required|string|email|max:1000',
+            'information' => 'required|string|max:1000',
             'price' => 'required|integer',
             'sort_order' => 'nullable|integer',
             'quantity' => 'required|integer',
             'shop_id' => 'required|exists:shops,id',
-            'secondary_category_id' => 'required|exists:categories,id',
-            'image1' => 'required|exists:images,id',
-            'image2' => 'required|exists:images,id',
-            'image3' => 'required|exists:images,id',
-            'image4' => 'required|exists:images,id',
+            'category' => 'required|exists:secondary_categories,id',
+            'image1' => 'nullable|exists:images,id',
+            'image2' => 'nullable|exists:images,id',
+            'image3' => 'nullable|exists:images,id',
+            'image4' => 'nullable|exists:images,id',
             'is_selling' => 'required',
         ]);
 
@@ -118,26 +118,27 @@ class ProductController extends Controller
         'status'=>'info']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+
+        $quantity = Stock::where('product_id',$product->id)
+                    ->sum('quantity');
+
+        $shops=Shop::where('owner_id',Auth::id())
+        ->select('id','name')
+        ->get();
+        $images=Image::where('owner_id',Auth::id())
+        ->select('id','title','filename')
+        ->get();
+        $categories=PrimaryCategory::with('secondary')
+        ->get();
+
+        return view('owner.products.edit'
+        ,compact('product','quantity','shops','images','categories'));
+
+
     }
 
     /**

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('information');
             $table->unsignedInteger('price');
-            $table->boolean('is_sellig');
+            $table->boolean('is_selling');
             $table->integer('sort_order')->nullable();
             $table->foreignId('shop_id')
             ->constrained()
