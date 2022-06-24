@@ -37,7 +37,7 @@
                         <div class="p-2 w-full mt-32 flex justify-around">
                           <a href="#" data-id="{{ $image->id }}" onclick="deletePost(this)" class=" text-white bg-red-400 border-0 py-2 px-4 focus:outline-none hover:bg-red-500 rounded">削除</a>
                         </div>
-                      </form>
+                    </form>
                 </div>
             </div>
         </div>

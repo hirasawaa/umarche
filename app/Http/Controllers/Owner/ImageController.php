@@ -123,6 +123,18 @@ class ImageController extends Controller
                     $product->image1=null;
                     $product->save();
                 }
+                if($product->image2 === $image->id){
+                    $product->image2=null;
+                    $product->save();
+                }
+                if($product->image3 === $image->id){
+                    $product->image3=null;
+                    $product->save();
+                }
+                if($product->image4 === $image->id){
+                    $product->image4=null;
+                    $product->save();
+                }
             });
         }
 
