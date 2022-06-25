@@ -12,7 +12,7 @@
     "devDependencies": {
         "@tailwindcss/forms": "^0.4.0",
         "alpinejs": "^3.4.2",
-        "autoprefixer": "^10.4.2",
+        "autoprefixer": "10.4.5",
         "axios": "^0.25",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
@@ -21,6 +21,7 @@
         "tailwindcss": "^3.0.18"
     },
     "dependencies": {
-        "micromodal": "^0.4.10"
+        "micromodal": "^0.4.10",
+        "swiper": "^6.7.0"
     }
 }
