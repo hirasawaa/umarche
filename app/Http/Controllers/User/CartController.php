@@ -42,4 +42,10 @@ class CartController extends Controller
 
         return view('user.cart',compact('products','totalPrice'));
     }
+
+    public function delete($id){
+        Cart::where('product_id',$id)->where('user_id',Auth::id())->delete();
+
+        return redirect()->route('user.cart.index');
+    }
 }
